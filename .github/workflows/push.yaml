@@ -32,6 +32,10 @@ jobs:
           load: true
           tags: hello-world:${{ github.sha }}
 
+      - name: PyTest
+        run: |
+          docker run hello-world:${{ github.sha }} pytest app.py
+
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
