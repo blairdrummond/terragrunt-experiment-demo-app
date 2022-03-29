@@ -4,6 +4,35 @@ A very simple Hello world api with a unix timestamp.
 
 **Note: The CI/CD intentionally does not push any images.**
 
+## How to run it
+
+Simply run `make run`
+
+```
+➜  terragrunt-experiment-demo-app git:(main) make run
+docker build . -t docker.io/hello-world-timestamp:main
+Sending build context to Docker daemon  103.4kB
+Step 1/10 : ARG PYTHON_TAG=3.9-alpine
+Step 2/10 : FROM python:$PYTHON_TAG
+ ---> 4b0c0ad22230
+Step 3/10 : COPY app/requirements.txt /tmp/requirements.txt
+ ---> Using cache
+ ---> e39f71ee5f01
+... (omitted)
+Step 10/10 : CMD ["uvicorn", "app:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+ ---> Using cache
+ ---> 35bada7cdac8
+Successfully built 35bada7cdac8
+Successfully tagged hello-world-timestamp:main
+docker run -p 8000:8000 docker.io/hello-world-timestamp:main
+INFO:     Will watch for changes in these directories: ['/home/app']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [1] using statreload
+INFO:     Started server process [8]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
+
 ## Features
 
 ### FastAPI
